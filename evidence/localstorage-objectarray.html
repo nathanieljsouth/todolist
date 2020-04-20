@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo Project Evidence</title>
+    <link href="https://fonts.googleapis.com/css?family=Cardo|Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .flex-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .flex-container > div {
+          background-color: #6ad5cb;
+          width: 500px;
+          margin: 10px;
+          text-align: center;
+          line-height: 50px;
+          font-size: 30px;
+        }
+
+        .flex-container > div > span {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    
+<div class="navigation">
+    <ul>
+        <li>
+            <a href="index.html"><img class="navimage" width="90px" src="images/todohomepageClear.png"></a>
+        </li>
+        <li>
+            <a class="navlink" href="index.html">Back to Menu</a>
+        </li>
+    </ul>
+</div>
+<h1>Local storage - storing the ToDo array</h1>
+
+<p>Local Storage works with strings so I need to figure out how to store my array of ToDo objects. I will need to convert the array of objects to a string before I can save it, and then convert it back from a string to an array when I read it.  I've used a flexbox div to display the results.</p>
+
+
+<div class="flex-container">
+    <div id="divResult"></div>
+</div>
+
+
+<script>
+    //Create the ToDo array first
+    //Create an empty JS array that we'll add some ToDo objects to
+    var todoItems=[];
+    
+    //This variable will be used to hold each todo object as we create it
+    var newTodoItem;
+
+    //Create and add a few todo objects to the array
+    newTodoItem = createToDoItem("Take out the trash", "Take the bin out and leave it by the driveway", "1 Apr 2020");
+    todoItems.push(newTodoItem);
+
+    newTodoItem = createToDoItem("Clean the car", "Clean and polish the car", "10 Apr 2020");
+    todoItems.push(newTodoItem);
+
+    newTodoItem = createToDoItem("Tidy my room", "Dust and vacuum my room", "20 Apr 2020");
+    todoItems.push(newTodoItem);
+    
+    
+    //Now I need to save the array to local storage - As local storage only understands strings I need to use the JSON stringify function to create a string version of the array
+    
+    //This variable will hold the stringified array
+    var stringifiedArray = JSON.stringify(todoItems);
+        
+    //Write the value to local storage
+    writeToStorage("ToDoItems",stringifiedArray);
+        
+    //Now read the saved value and create a new array from it
+    //This variable will hold the value we get back from local storage
+    var storedArray = readFromStorage("ToDoItems");
+
+    //Create a new array variable
+    var newToDoItems = [];
+
+    //populate the new array by convering the string to an array of todo objects using the JSON.parse function
+    newToDoItems = JSON.parse(storedArray);
+    
+    //Now check that I can read a ToDo item from the new array
+    showResultWithNewline(newToDoItems[1].title);
+    showResultWithNewline(newToDoItems[1].description);
+    showResultWithNewline(newToDoItems[1].dueDate);
+    
+    
+    //This function returns a ToDo item based on the title, description and due date passed in
+    function createToDoItem(newTitle, newDescription, newDate) {
+    
+        var todoItem = {
+        title:newTitle, 
+        description:newDescription, 
+        dueDate:newDate};
+        
+        return todoItem;
+    }
+
+    
+    //This function adds the supplied string to the end of what's already in the div
+    function showResultWithNewline(TextToShow) {
+      document.getElementById("divResult").innerHTML += TextToShow + "<br/>";
+    }
+
+    //This function writes a string to local storage
+	function writeToStorage(name, value){
+		localStorage.setItem(name, value);
+	}
+
+    //This function reads a string from local storage
+	function readFromStorage(name){
+        //This variable will hold the item retrieved from storage
+        var storedItem;
+        storedItem = localStorage.getItem(name);
+		return (storedItem);
+	}
+
+    //This function removes a value from local storage
+	function clearStorage(name){
+		localStorage.removeItem(name);
+	}
+</script>
+    </body>
+</html>

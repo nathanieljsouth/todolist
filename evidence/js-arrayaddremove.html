@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo Project Evidence</title>
+    <link href="https://fonts.googleapis.com/css?family=Cardo|Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .flex-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .flex-container > div {
+          background-color: #6ad5cb;
+          width: 500px;
+          margin: 10px;
+          text-align: center;
+          line-height: 50px;
+          font-size: 30px;
+        }
+
+        .flex-container > div > span {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    
+<div class="navigation">
+    <ul>
+        <li>
+            <a href="index.html"><img class="navimage" width="90px" src="images/todohomepageClear.png"></a>
+        </li>
+        <li>
+            <a class="navlink" href="index.html">Back to Menu</a>
+        </li>
+    </ul>
+</div>
+<h1>Adding and removing items from a Javascript array</h1>
+
+<p>My ToDo items will be added to an array and also removed from the array, so I had to find out how to add and remove array items.  I've used a flexbox div to display the results.</p>
+
+
+<div class="flex-container">
+    <div id="divResult"></div>
+</div>
+
+<script>
+    //Create a JS array with some fruit names in it
+    var allTheFruit=["Apple","Pear","Banana"];
+    
+    //Display the number of items in the array
+    showResultWithNewline (allTheFruit.length);
+        
+    //Add an item to the end of the array
+    allTheFruit.push("Kiwi");
+    
+    //Display the number of items in the array
+    showResultWithNewline (allTheFruit.length);
+        
+    //Remove the second item in the array
+    //The first parameter is the item to remove, the second parameter says to remove one item
+    allTheFruit.splice(1,1);
+    
+    //Display the number of items in the array
+    showResultWithNewline (allTheFruit.length);
+    
+    //This function adds the supplied string to the end of what's already in the div
+    function showResultWithNewline(TextToShow) {
+      document.getElementById("divResult").innerHTML += TextToShow + "<br/>";
+    }
+
+</script>
+    </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo Project Evidence</title>
+    <link href="https://fonts.googleapis.com/css?family=Cardo|Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .flex-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .flex-container > div {
+          background-color: #6ad5cb;
+          width: 500px;
+          margin: 10px;
+          text-align: center;
+          line-height: 50px;
+          font-size: 30px;
+        }
+
+        .flex-container > div > span {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    
+<div class="navigation">
+    <ul>
+        <li>
+            <a href="index.html"><img class="navimage" width="90px" src="images/todohomepageClear.png"></a>
+        </li>
+        <li>
+            <a class="navlink" href="index.html">Back to Menu</a>
+        </li>
+    </ul>
+</div>
+<h1>HTML Templates - basics</h1>
+
+<p>I want to be able to use a template for each ToDo item so that it's easy to display them and also really easy to change how they look if I want to alter things later.  This example shows how to use templates in a basic way to create flexbox divs.</p>
+
+
+<div id="divContainer" class="flex-container">
+   
+</div>
+    
+<template id="itemTemplate">
+	<div>
+		This is a new div
+	</div>
+</template>
+
+<script>
+
+    //Create a new template item in the flexbox - do this 4 times
+    createNewTemplateItem();
+    createNewTemplateItem();
+    createNewTemplateItem();
+    createNewTemplateItem();
+    
+    //This function creates a copy of the template div
+    function createNewTemplateItem(){
+        //First, get the template
+		var theTemplate = document.getElementById("itemTemplate");
+        
+        //Next get the div inside the template
+		var theTemplateDiv = theTemplate.content.querySelector("div");
+        
+        //Clone the div by telling the document to import it (otherwise we can only do this once)
+		var node = document.importNode(theTemplateDiv, true);
+        
+        //Finally, add the cloned div to the flexbox
+		document.getElementById("divContainer").appendChild(node);
+	}
+</script>
+    </body>
+</html>

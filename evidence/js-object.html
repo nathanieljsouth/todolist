@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo Project Evidence</title>
+    <link href="https://fonts.googleapis.com/css?family=Cardo|Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .flex-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .flex-container > div {
+          background-color: #6ad5cb;
+          width: 500px;
+          margin: 10px;
+          text-align: center;
+          line-height: 50px;
+          font-size: 30px;
+        }
+
+        .flex-container > div > span {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    
+<div class="navigation">
+    <ul>
+        <li>
+            <a href="index.html"><img class="navimage" width="90px" src="images/todohomepageClear.png"></a>
+        </li>
+        <li>
+            <a class="navlink" href="index.html">Back to Menu</a>
+        </li>
+    </ul>
+</div>
+<h1>Creating a Javascript object for a ToDo item </h1>
+
+<p>My ToDo items have a title, a due date and a description.  I wanted to use a Javascript object to store this information so I had to find out how to create an object.  I've used a flexbox div to display the results.</p>
+
+
+<div class="flex-container">
+    <div id="divResult"></div>
+</div>
+
+    
+<script>
+    
+    //Create a javascript object with the properties of a ToDo item
+    //Javascript lets us just type the object and its properties and the object is created
+    var todoItem = {
+        title:"Take out the trash", 
+        description:"Take the trash out and leave the bin next to the driveway", 
+        dueDate:"1 April 2020"};
+    
+    //Display what we get by reading the properties
+    showResultWithNewline (todoItem.title);
+    showResultWithNewline (todoItem.description);
+    showResultWithNewline (todoItem.dueDate);
+    
+    //This function adds the supplied string to the end of what's already in the div
+    function showResultWithNewline(TextToShow) {
+      document.getElementById("divResult").innerHTML += TextToShow + "<br/>";
+    }
+
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+* {
+    color: white;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    background-image: linear-gradient(#1c2541, #3a506b);
+    background-attachment: fixed;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    display: inline-block;
+    margin-right: 20pt;
+    margin-left: 20pt;
+    vertical-align: middle;    
+}
+
+a {
+    text-decoration: none;
+}
+
+.navlink{
+    font-size: 30pt;
+    color: #6ad5cb;
+}
+
+div ul li {
+    font-size: 15pt;
+}
+
+.navimage {
+  border-radius: 8px;
+}
+
+img:hover {
+  box-shadow: 0 0 5px 5px #6ad5cb;
+}
+
