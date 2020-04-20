@@ -52,8 +52,20 @@
 </div>
 
 <a href="javascript:viewSource();">View Source</a>
-    
-<script>
+    <script>
+          function viewSource(){;
+            var source = "<html>";
+            source += document.getElementsByTagName('html')[0].innerHTML;
+            source += "</html>";
+            source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            source = "<pre>"+source+"</pre>";
+            sourceWindow = window.open('','Source of page','height=800,width=800,scrollbars=1,resizable=1');
+            sourceWindow.document.write(source);
+            sourceWindow.document.close(); 
+            if(window.focus) sourceWindow.focus();
+        }  
+
+
     //Create a JS array with some fruit names in it
     var allTheFruit=["Apple","Pear","Banana"];
     
@@ -65,17 +77,6 @@
       document.getElementById("divResult").innerHTML += TextToShow + "<br/>";
     }
 
-    function viewSource(){;
-        var source = "<html>";
-        source += document.getElementsByTagName('html')[0].innerHTML;
-        source += "</html>";
-        source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        source = "<pre>"+source+"</pre>";
-        sourceWindow = window.open('','Source of page','height=800,width=800,scrollbars=1,resizable=1');
-        sourceWindow.document.write(source);
-        sourceWindow.document.close(); 
-        if(window.focus) sourceWindow.focus();
-    }  
     
 </script>
     </body>
