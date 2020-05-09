@@ -30,11 +30,9 @@
         Clicking the link creates dummy data - it will delete and replace all existing data.  BE CAREFUL!
     </div>
     
-    <div class="flex-container">
-        <div id="divResult"></div>
-    </div>
-    
     <a href="javascript:createDummyData();">Click Here To Create Dummy Data!</a>
+
+    <div id="divMessage" class="message"></div>
 
     <script>
           //This function creates a dummy set of data - it makes testing much easier as I don't have to constantly create lots of to do items
@@ -63,13 +61,9 @@
             saveToDoItemsToStorage(toDoItems);
             
             //Tell the user that we've finished
-            showResultWithNewline ('Data created')
+            document.getElementById("divMessage").innerHTML = "Data Created";
           }  
 
-        //This function adds the supplied string to the end of what's already in the div
-        function showResultWithNewline(TextToShow) {
-          document.getElementById("divResult").innerHTML += TextToShow + "<br/>";
-        }
 
     </script>
 
