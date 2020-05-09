@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo!</title>
+    <link href="https://fonts.googleapis.com/css?family=Cardo|Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="flexboxstyle.css">
+    <script src="js/storage.js"></script>
+    <script src="js/todo.js"></script>
+</head>
+
+<body>
+    <div class="navigation">
+        <ul>
+            <li>
+                <a href="index.html"><img class="navimage" title="Reminder List" width="90px" src="images/todohomepageClear.png"></a>
+            </li>
+            <li>
+                <a class="navlink" href="addreminder.html"><img title="Add Reminder" width=80px height=80px src="images/add.png"/></a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div>
+        <p class="sectionheader">Dummy Data Creation</p><br/>
+        Clicking the link creates dummy data - it will delete and replace all existing data.  BE CAREFUL!
+    </div>
+    
+    <div class="flex-container">
+        <div id="divResult"></div>
+    </div>
+    
+    <a href="javascript:createDummyData();">Click Here To Create Dummy Data!</a>
+
+    <script>
+          //This function creates a dummy set of data - it makes testing much easier as I don't have to constantly create lots of to do items
+          function createDummyData(){
+              
+            //Delete the existing data
+            clearToDoItemsFromStorage();
+            
+            //Create a JS array to hold the to do items we're about to create
+            var toDoItems = [];      
+            
+            //This variable will hold each to do item as we create it
+            var newTodoItem;
+            
+            //Create some new to do items, add each to the array
+            newTodoItem = createToDoItem("Take out the trash", "Take the bin out and leave it by the driveway", "2020-04-01");
+            addToDoItemToArray (toDoItems, newTodoItem);
+
+            newTodoItem = createToDoItem("Clean the car", "Clean and polish the car", "2020-04-10");
+            addToDoItemToArray (toDoItems, newTodoItem);
+
+            newTodoItem = createToDoItem("Tidy my room", "Dust and vacuum my room", "2020-04-20");
+            addToDoItemToArray (toDoItems, newTodoItem);
+              
+            //Save the to do items
+            saveToDoItemsToStorage(toDoItems);
+            
+            //Tell the user that we've finished
+            showResultWithNewline ('Data created')
+          }  
+
+        //This function adds the supplied string to the end of what's already in the div
+        function showResultWithNewline(TextToShow) {
+          document.getElementById("divResult").innerHTML += TextToShow + "<br/>";
+        }
+
+    </script>
+
+</body>
+</html>

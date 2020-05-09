@@ -7,27 +7,103 @@
     <title>ToDo!</title>
     <link href="https://fonts.googleapis.com/css?family=Cardo|Oswald&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="flexboxstyle.css">
+    <script src="js/storage.js"></script>
+    <script src="js/todo.js"></script>    
+    
 </head>
 
 <body>
     <div class="navigation">
         <ul>
             <li>
-                <a href="index.html"><img class="navimage" width="90px" src="images/todohomepageClear.png"></a>
+                <a href="index.html"><img class="navimage" title="Reminder List" width="90px" src="images/todohomepageClear.png"></a>
             </li>
             <li>
-                <a class="navlink" href="addreminder.html">Add a reminder</a>
+                <a class="navlink" href="addreminder.html"><img title="Add Reminder" width=80px height=80px src="images/add.png"/></a>
             </li>
         </ul>
     </div>
 
     <div>
-        <p class="sectionheader">Welcome to the SKC Reminder page Please use the home image on top to return to this page</p><br/>
-        To be completed - display the reminders
+        <p class="sectionheader">Welcome to the SKC Reminder app.  Here are your reminders.  Click the add icon to create a new reminder.  Click on an existing reminder to view the details.  Click on the delete icon to remove a reminder.</p>
     </div>
     
+    <div id="divContainer" class="flex-container">
 
+    </div>
+    
+    <template id="itemTemplate">
+        <div>
+            <a href="details.html?$id$">
+                <p class="ToDoTitle">$title$</p>
+                <p class="ToDoDate">$duedate$</p>
+            </a>
+            <a href="javascript:deleteItem($deleteid$);"><img width=30px height=40px src="images/delete.png"/></a>
+        </div>
+    </template>
+
+    
+    <script>
+        //Load the to do items from storage
+        //Loop over the to do items and create a copy of the template for each to do item, and put the new copy in the flexbox
+        
+        //Get the array of to do items from storage
+        
+        //Create a JS array to hold the to do items
+        var toDoItems = [];     
+     
+        //Get the to do items from storage
+        toDoItems = loadToDoItemsFromStorage();
+     
+        //Create a new template item in the flexbox for each item in the array
+        
+        //This variable holds each toDo item as we loop over the array
+        var theToDoItem;
+
+        //This variable holds the number of the todo item - we need this for the link
+        var toDoItemId = 0;
+        
+        //Loop over all items in the array and create a new template item for it
+        for (theToDoItem of toDoItems){
+             //In each template item we need to populate the title, description and due date
+             createNewTemplateItem (toDoItemId, theToDoItem.title, theToDoItem.dueDate);       
+            toDoItemId+=1;
+        }
+
+        //This function creates a copy of the template div
+        function createNewTemplateItem(theToDoId, theTitle, theDueDate){
+            //First, get the template
+            var theTemplate = document.getElementById("itemTemplate");
+
+            //Next get the div inside the template
+            var theTemplateDiv = theTemplate.content.querySelector("div");
+
+            //Clone the div by telling the document to import it (otherwise we can only do this once)
+            var node = document.importNode(theTemplateDiv, true);
+
+            //Alter the HTML inside the div
+            node.innerHTML = node.innerHTML.replace("$title$", theTitle, );
+            node.innerHTML = node.innerHTML.replace("$duedate$", theDueDate);
+            node.innerHTML = node.innerHTML.replace("$id$", theToDoId);
+            node.innerHTML = node.innerHTML.replace("$deleteid$", theToDoId);
+
+            //Finally, add the cloned div to the flexbox
+            document.getElementById("divContainer").appendChild(node);
+        }
+    
+        //This function deletes an item and then refreshes the page so the list is correct
+        function deleteItem(idToDelete){
+            //Delete the item
+            deleteToDoItemFromArray(toDoItems, idToDelete);
+            
+            //Save the array
+            saveToDoItemsToStorage(toDoItems);
+            
+            //Refresh the page
+            window.location.reload();
+        }
+     </script>
 
 </body>
 </html>

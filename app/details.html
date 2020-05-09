@@ -4,35 +4,77 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Climate Change</title>
+    <title>ToDo!</title>
     <link href="https://fonts.googleapis.com/css?family=Cardo|Oswald&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="flexboxstyle.css">
+    <script src="js/storage.js"></script>
+    <script src="js/todo.js"></script>    
 </head>
 
 <body>
     <div class="navigation">
         <ul>
             <li>
-                <a href="index.html"><img class="navimage" width="90px" src="images/todohomepageClear.png"></a>
-            </li>
-            <!-- I used dummy nav items here to push the real nav items to the right -->
-            <li></li>
-        
-            <li>
-                Reminder Details
+                <a href="index.html"><img class="navimage" title="Reminder List" width="90px" src="images/todohomepageClear.png"></a>
             </li>
             <li>
-                <a class="navlink" href="addreminder.html">Add a Reminder</a>
+                <a class="navlink" href="addreminder.html"><img title="Add Reminder" width=80px height=80px src="images/add.png"/></a>
             </li>
         </ul>
+
     </div>
 
     <div>
         <p class="sectionheader">Reminder Details</p><br/>
-        To be completed - display the reminder details for one reminder
     </div>
+    <div id="divTitle" class="title"></div>
+    <div id="divDueDate" class="duedate"></div>
+    <div id="divDescription" class="description"></div>
+    <div id="divMessage" class="message"></div>
     
+    
+    <script>
+
+        //Get the array of to do items from storage
+        
+        //Create a JS array to hold the to do items
+        var toDoItems = [];     
+     
+        //Get the to do items from storage
+        toDoItems = loadToDoItemsFromStorage();
+     
+        //Show the details of the to do item
+        //This variable will hold the item that we've been asked to show
+        var theToDoItem;
+     
+         //This variable will be used to hold the array item we need to show - it's been passed as part of the URL and is returned as the 'search' property of the window.location
+        var wantedItem = window.location.search;
+    
+        //The search property contains the ? character so we need to get rid of it
+        wantedItem = wantedItem.replace("?","");
+
+        //Check that the to do item that we've been asked to show is valid
+        //The wantedItem has to be a number and between 0 and the number of todo items in the array - 1
+        if(isNaN(wantedItem)){
+            document.getElementById("divMessage").innerHTML = "Please supply a numeric id";
+        } else if(wantedItem < 0 || wantedItem > toDoItems.length-1){
+            document.getElementById("divMessage").innerHTML = "That item doesn't exist";
+        } else {
+            //The number is valid so show the to do item
+        
+            theToDoItem = toDoItems[wantedItem];
+
+            //Show the details in the divs
+            document.getElementById("divTitle").innerHTML = theToDoItem.title;
+            document.getElementById("divDueDate").innerHTML = theToDoItem.dueDate;
+            document.getElementById("divDescription").innerHTML = theToDoItem.description;
+            
+        };
+
+
+
+     </script>
 
 
 </body>

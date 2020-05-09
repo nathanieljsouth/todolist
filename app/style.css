@@ -33,45 +33,82 @@ div ul li {
     font-size: 15pt;
 }
 
-.sectionheader {
-    color: #38aecc; 
-    font-weight: 700;
-    font-size: 25pt;
-    width: 500px;
-}
-
 .navimage {
   border-radius: 8px;
-}
-
-.listimage {
-  border: 1px solid white;
-  border-radius: 8px;
-  padding: 10px;
-  width: 150px;
 }
 
 img:hover {
   box-shadow: 0 0 5px 5px #6ad5cb;
 }
 
-.introtext {
-    text-align: center;
-    font-family: 'Cardo', serif;
-    width: 500px;
-}
-.furtherinfo {
-    text-align: center;
-    font-family: 'Cardo', serif;
-    font-size: 12pt;
-    width: 300px;
-    display: block;
+input {
+    color: black;
 }
 
-div p {
+textarea {
+    color: black;
+}
+
+.ToDoTitle {
+    color: black;
+}
+
+.ToDoDate{
+    color: gray
+}
+
+.form{
+    margin: 0 auto;
+    width: 400px;
+}
+
+.form label{
+		display: inline-block;
+		text-align: right;
+		float: left;
+	}
+
+.form input{
+		display: inline-block;
+		text-align: left;
+		float: right;
+    width: 250px;
+	}
+
+.form textarea{
+		display: inline-block;
+		text-align: left;
+		float: right;
+    width: 250px;
+	}
+
+.form .cancel{
     display: inline-block;
+    text-align: right;
+    float: left;
 }
 
-.listlink{
-    display: block;
+.form .save{
+    display: inline-block;
+    text-align: left;
+    float: right;
+}
+
+.message{
+    color: red;
+    
+}
+
+.title{
+    font-size: 30pt;
+}
+
+.duedate{
+    font-size: 20pt;
+    color:lightgray
+}
+
+.description{
+    font-size: 20pt;
+    color:lightgray
 }
