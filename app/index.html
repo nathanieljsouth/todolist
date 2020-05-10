@@ -28,7 +28,7 @@
     <div>
         <p class="sectionheader">Welcome to the SKC Reminder app.  Here are your reminders.  Click the add icon to create a new reminder.  Click on an existing reminder to view the details.  Click on the delete icon to remove a reminder.</p>
     </div>
-    
+    <div id="divMessage" class="message"></div>
     <div id="divContainer" class="flex-container">
 
     </div>
@@ -42,7 +42,6 @@
             <a href="javascript:deleteItem($deleteid$);"><img width=30px height=40px src="images/delete.png"/></a>
         </div>
     </template>
-
     
     <script>
         //Load the to do items from storage
@@ -55,21 +54,28 @@
      
         //Get the to do items from storage
         toDoItems = loadToDoItemsFromStorage();
-     
-        //Create a new template item in the flexbox for each item in the array
+        //Here we are checking to see if the array is empty, if the array is empty a message will appear.  Also check if the array even exists at all (it won't exist until the first item is created)
         
-        //This variable holds each toDo item as we loop over the array
-        var theToDoItem;
+        if(toDoItems==null || toDoItems.length==0){
+            //document.getElementById("divMessage").innerHTML = "You don't have any reminders, try adding one.";
+        } else {
+            //Create a new template item in the flexbox for each item in the array
 
-        //This variable holds the number of the todo item - we need this for the link
-        var toDoItemId = 0;
+            //This variable holds each toDo item as we loop over the array
+            var theToDoItem;
+
+            //This variable holds the number of the todo item - we need this for the link
+            var toDoItemId = 0;
+
+            //Loop over all items in the array and create a new template item for it
+            for (theToDoItem of toDoItems){
+                 //In each template item we need to populate the title, description and due date
+                 createNewTemplateItem (toDoItemId, theToDoItem.title, theToDoItem.dueDate);       
+                toDoItemId+=1;
+            }
+        };
         
-        //Loop over all items in the array and create a new template item for it
-        for (theToDoItem of toDoItems){
-             //In each template item we need to populate the title, description and due date
-             createNewTemplateItem (toDoItemId, theToDoItem.title, theToDoItem.dueDate);       
-            toDoItemId+=1;
-        }
+        
 
         //This function creates a copy of the template div
         function createNewTemplateItem(theToDoId, theTitle, theDueDate){
