@@ -54,6 +54,11 @@
         //Get the to do items from storage
         toDoItems = loadToDoItemsFromStorage();
 
+        //If there is nothing in local storage, we have to create the empty array again because the function will set it to null
+        if (toDoItems==null){
+            toDoItems = [];
+        };
+        
         //This function is executed when the user hits save
         function saveData(){
             //If the data is valid then create the toDo Item
